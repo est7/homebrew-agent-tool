@@ -1,4 +1,4 @@
-  class AgentTool < Formula
+class AgentTool < Formula
     desc "CLI to create, list and manage per-task agent workspaces for Git repositories"
     homepage "https://github.com/est7/agent-tool"
     url "https://github.com/est7/agent-tool/archive/refs/tags/v0.4.0.tar.gz"
@@ -12,6 +12,9 @@
                       "agent-android.sh",
                       "agent-ios.sh",
                       "agent-web.sh"
+
+      # 确保主脚本有执行权限（避免升级后丢失 x 位）
+      chmod 0o755, libexec/"agent-tool.sh"
 
       # 在 bin 下生成一个 wrapper，实际执行 libexec 里的主脚本
       (bin/"agent-tool").write_env_script libexec/"agent-tool.sh", {}
