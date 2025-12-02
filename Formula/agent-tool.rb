@@ -2,7 +2,7 @@
     desc "CLI to create, list and manage per-task agent workspaces for Git repositories"
     homepage "https://github.com/est7/agent-tool"
     url "https://github.com/est7/agent-tool/archive/refs/tags/v0.1.0.tar.gz"
-    sha256 "50ce5ae1c1d59129f354c20ad847d8141cf16e06f2798e8a86091d6db11b9b30"
+    sha256 "d70416aff8b7e0950011ec34808b808ae86d70dafff96406db2e72e594f6afee"
     license "MIT"
 
     depends_on "git"
