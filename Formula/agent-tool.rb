@@ -1,28 +1,32 @@
 class AgentTool < Formula
     desc "CLI to create, list and manage per-task agent workspaces for Git repositories"
     homepage "https://github.com/est7/agent-tool"
-    url "https://github.com/est7/agent-tool/archive/refs/tags/v0.4.0.tar.gz"
-    sha256 "26fe80501457ab7ddd4044897b418ec68e05d6013b9248b682ecca70be729fbd"
+    url "https://github.com/est7/agent-tool/archive/refs/tags/v0.5.0.tar.gz"
+    sha256 "61f3d11231a4815e3d6d17cb69b10a79be043f9ba0995b93436c5d7c94e27f7e"
     license "MIT"
 
     def install
-      # 所有脚本装到同一个 libexec 目录
+      # 把主脚本和所有模块目录一起装到 libexec 下
       libexec.install "agent-tool.sh",
-                      "agent-workspace.sh",
-                      "agent-android.sh",
-                      "agent-ios.sh",
-                      "agent-web.sh"
+                      "cfg",
+                      "ws",
+                      "build",
+                      "doctor",
+                      "dev",
+                      "test"
 
-      # 确保主脚本有执行权限（避免升级后丢失 x 位）
+      # 确保主脚本可执行
       chmod 0o755, libexec/"agent-tool.sh"
 
-      # 在 bin 下生成一个 wrapper，实际执行 libexec 里的主脚本
+      # bin 下放 wrapper，真正执行 libexec 里的脚本
       (bin/"agent-tool").write_env_script libexec/"agent-tool.sh", {}
     end
 
     test do
-      # 为了让脚本通过 REPO_ROOT 校验，这里建一个最小 git 仓库
+      # 为了通过 REPO_ROOT 校验，这里建一个最小 git 仓库
       system "git", "init", "."
-      system "#{bin}/agent-tool", "list"
+
+      # 使用新的 ws 分组命令；只要不报错即可
+      system "#{bin}/agent-tool", "ws", "list"
     end
   end
