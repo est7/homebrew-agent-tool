@@ -1,8 +1,8 @@
 class AgentTool < Formula
   desc "CLI to create, list and manage per-task agent workspaces for Git repositories"
   homepage "https://github.com/est7/agent-tool"
-  url "https://github.com/est7/agent-tool/archive/refs/tags/v0.7.0.tar.gz"
-  sha256 "90a23fc160578684a3d1b516ecc4489ae8ac14470c2dc666e713518b37f10164"
+  url "https://github.com/est7/agent-tool/archive/refs/tags/v0.8.0.tar.gz"
+  sha256 "4c23cb48d2971865126af3e9065bc4649dfae502c5a34ad8ca547abe6c8fd8cc"
   license "MIT"
 
   def install
