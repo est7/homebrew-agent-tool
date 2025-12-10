@@ -1,19 +1,20 @@
-class AgentTool < Formula
+⏺ class AgentTool < Formula
     desc "CLI to create, list and manage per-task agent workspaces for Git repositories"
     homepage "https://github.com/est7/agent-tool"
-    url "https://github.com/est7/agent-tool/archive/refs/tags/v0.5.0.tar.gz"
-    sha256 "61f3d11231a4815e3d6d17cb69b10a79be043f9ba0995b93436c5d7c94e27f7e"
+    url "https://github.com/est7/agent-tool/archive/refs/tags/v0.6.0.tar.gz"
+    sha256 "58318af12182ab70f6c3b38f6b3ff41f3d61de9e01d2809f84a463f4f6c80710"
     license "MIT"
 
     def install
-      # 把主脚本和所有模块目录一起装到 libexec 下
-      libexec.install "agent-tool.sh",
-                      "cfg",
-                      "ws",
-                      "build",
-                      "doctor",
-                      "dev",
-                      "test"
+      # 安装主脚本
+      libexec.install "agent-tool.sh"
+
+      # 自动安装所有子目录（排除不需要的）
+      Dir.glob("*/").each do |dir|
+        dir_name = dir.chomp("/")
+        next if %w[draft temp .git].include?(dir_name)
+        libexec.install dir_name
+      end
 
       # 确保主脚本可执行
       chmod 0o755, libexec/"agent-tool.sh"
